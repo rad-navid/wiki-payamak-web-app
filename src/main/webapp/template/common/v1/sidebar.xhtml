@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition>
+		<div id="sidebar">
+
+			<h:panelGrid>
+				<h2></h2>
+					<h:outputLink value="http://cafebazaar.ir/app/com.peaceworld.wikisms/?l=fa"	target="_blank" >
+					<h:graphicImage style="margin-top: 25px;" width="253"	value="/resources/images/android_app_logo.png"/>
+				</h:outputLink> 
+				
+			</h:panelGrid>
+
+			<ul>
+				<li>
+					<h2 dir="rtl">جستجو</h2> 
+					<h:form  id="search_form">
+						<h:inputText id="search" value="#{contentBrowserBean.search}" />
+						<h:commandButton id="searchbtn"
+							action="#{contentBrowserBean.searchMod()}" style="display:none"
+							value="submit" />
+					</h:form> <!--  	<input name="q" type="text" size="40" placeholder="Search..." /> -->
+				</li>
+			</ul>
+			
+			<ul>
+				<li><ui:insert name="content_categories">
+						<ui:include src="/template/common/v1/sidebar_groups.xhtml" />
+					</ui:insert></li>
+				<li><ui:insert name="special_links">
+						<ui:include src="/template/common/v1/sidebar_links.xhtml" />
+					</ui:insert></li>
+			</ul>
+		</div>
+		<!-- end sidebar -->
+	</ui:composition>
+
+</body>
+</html>

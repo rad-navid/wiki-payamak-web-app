@@ -1,0 +1,29 @@
+
+#content {
+	height: 300px;
+	margin-bottom:50px;
+	
+}
+
+#content > div {
+	border-top-left-radius: 25px;
+	border-top-right-radius : 3px;
+	border-bottom-right-radius : 3px; 
+	border-bottom-left-radius : 3px;
+	margin-left: 18px;
+	margin-top:40px;
+	margin-right: 0px;
+	border:none;
+	direction: rtl;
+	padding-left: 100px;
+	padding-right: 20px;
+	padding-top: 50px;
+	padding-bottom: 100px;
+	}
+	
+#sidebar {
+	height: 300px;
+	margin-bottom:50px;
+	
+	}
+	

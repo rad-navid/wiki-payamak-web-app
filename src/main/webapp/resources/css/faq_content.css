@@ -1,0 +1,17 @@
+
+#content > div {
+		
+		direction: rtl;
+		background: none;
+		color: inherit;
+		font: inherit;
+		margin: 50px;
+	}
+
+#content div p  {
+		
+		line-height: 2em;
+	}
+	
+	
+

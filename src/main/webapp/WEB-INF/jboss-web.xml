@@ -1,0 +1,16 @@
+<!DOCTYPE jboss-web PUBLIC
+    "-//JBoss//DTD Web Application 5.0//EN"
+    "http://www.jboss.org/j2ee/dtd/jboss-web_5_0.dtd" >
+
+
+<jboss-web>
+   
+   <max-active-sessions>750</max-active-sessions>
+   <passivation-config>
+      <use-session-passivation>false</use-session-passivation>
+      <passivation-min-idle-time>60</passivation-min-idle-time>
+      <passivation-max-idle-time>600</passivation-max-idle-time>
+   </passivation-config>
+
+
+</jboss-web>

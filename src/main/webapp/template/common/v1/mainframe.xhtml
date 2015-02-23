@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>ویکی پیامک</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<h:outputStylesheet library="css" name="default.css" />
+
+</h:head>
+
+<h:body>
+	<ui:insert name="header">
+		<div id="header">
+			<div id="logo">
+				<h2>خوش آمدید</h2>
+				<h1>
+					<a href="#">ویکی پیامک</a>
+				</h1>
+				<h2>به</h2>
+			</div>
+			<div id="menu">
+				<h:form id="panelForm">
+					<ul>
+						<li class="active"><h:commandLink value="صفحه اصلی" accesskey="1" action="pretty:home" /></li>
+						<li><h:commandLink  value="پنل کاربری" action="pretty:userpanel" /></li>
+						<li><h:commandLink value="ویکی پیامک" action="pretty:faq" /></li>
+						<li><p:commandLink ajax="false"  action="pretty:contactus" >تماس با ما</p:commandLink></li>
+					</ul>
+
+					
+				</h:form>
+			</div>
+
+		</div>
+	</ui:insert>
+	<hr />
+	<div id="page">
+		<div id="bg">
+			<ui:insert name="content">
+				<div id="content">
+					<ui:insert name="post">
+
+						<div class="post">
+							<h2 class="title">Blandit consequat etiam</h2>
+							<h3 class="date">Wednesday, July 4, 2007</h3>
+							<div class="entry">
+								<p>Pellentesque augue. Quisque eu sem sed lacus tincidunt
+									posuere. Praesent nunc augue, laoreet eu, consectetuer eget,
+									tempus eget, neque. Donec felis. Duis nec neque in bibendum
+									rutrum. Donec viverra porta magna. Ut sit amet libero ac mauris
+									fringilla faucibus. Maecenas tristique velit in arcu. Quisque
+									sed tortor sit amet est facilisis tempor. Quisque porttitor.
+									Donec ac diam quis velit molestie mattis.</p>
+							</div>
+							<p class="meta">
+								<a href="#" class="more">Read full article</a> <b>|</b> <a
+									href="#" class="comments">Comments (32)</a>
+							</p>
+						</div>
+					</ui:insert>
+
+				</div>
+			</ui:insert>
+			<!-- end contentn -->
+			<ui:insert name="disebar">
+				<div id="sidebar">
+					<ui:insert name="sidebar_content">
+						<ul>
+							<li>
+								<h2>Categories</h2>
+								<ul>
+									<li class="first"><a href="#">Lorem ipsum dolor</a></li>
+									<li><a href="#">Sit amet nullam</a></li>
+								</ul>
+							</li>
+							<li>
+								<h2>Links</h2>
+								<ul>
+									<li class="first"><a href="#">Neque bibendum</a></li>
+									<li><a href="#">Donec diam</a></li>
+								</ul>
+							</li>
+						</ul>
+					</ui:insert>
+				</div>
+			</ui:insert>
+			<!-- end sidebar -->
+			<div style="clear: both;">&nbsp;</div>
+		</div>
+	</div>
+	<!-- end page -->
+	<hr />
+	<div id="footer">
+		<ui:insert name="footer">
+			<p>
+				تمام حقوق مطالب برای وب سایت <a
+					href="http://www.wiki-sms.com/" target="_blank"> ویکی پیامک </a> محفوظ است
+			</p>
+		</ui:insert>
+	</div>
+	<div align="center" style="display:none">
+		<ui:insert name="trailer">
+		This template downloaded form <a
+				href='http://all-free-download.com/free-website-templates/'>free
+				website templates</a>
+		</ui:insert>
+	</div>
+</h:body>
+</html>

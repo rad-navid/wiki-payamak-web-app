@@ -1,0 +1,16 @@
+
+#sidebar {
+	height: 700px;
+}
+
+#sidebar a {
+	color: #38B5F1;
+}
+
+#sidebar > div {
+	direction: rtl;
+	padding-right: 100px;
+	line-height: 50px;
+	
+}
+

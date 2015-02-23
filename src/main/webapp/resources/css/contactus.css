@@ -1,0 +1,17 @@
+
+#contactUsPanel {
+	border-top-left-radius: 25px;
+	border-top-right-radius : 3px;
+	border-bottom-right-radius : 3px; 
+	border-bottom-left-radius : 3px;
+	margin-left: 20px;
+	margin-top:30px;
+	border:none;
+	direction: rtl;
+	}
+	
+.innercontent{
+	
+	margin-right: 50px;
+
+	}

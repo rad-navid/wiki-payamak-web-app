@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+
+<h:body>
+
+	<ui:composition template="/template/common/v1/mainframe.xhtml">
+
+		<ui:define name="post">
+	
+			<p:growl id="publicMessage" widgetVar="growl" showDetail="true" showSummary="true" autoUpdate="true" globalOnly="true"/>
+			
+			<h:outputStylesheet library="css" name="contactus.css" />
+
+			<h:form>
+				<p:panel
+					style="border-top-left-radius: 25px;
+					border-top-right-radius:3px;border-bottom-right-radius:3px;border-bottom-left-radius:3px;
+					margin-left: 20px;margin-top:30px;border:none;direction: rtl;"
+					id="contactUsPanel" header="نظرات/پیشنهادات/انتقادات">
+
+					<br />
+					<p:outputLabel	value="اگر مایلید پاسخی دریافت کنید، ایمیل خود را در پایان پیامتان ذکر کنید" />
+					<br />
+					<br />
+					<p:editor style="margin-right:-15px;" id="Emaileditor"	widgetVar="emailEditorWidget"
+						value="#{userPanelBean.emailUsContent}" width="600" />
+
+					<h:panelGrid columns="2" style="margin-top: 10px">
+						<p:commandButton id="sendEmailBtn" value="ارسال" ajax="true"
+							action="#{userPanelBean.sendEmailAndReturnToHome()}" update="@form" />
+						<p:commandButton value="پاک کردن" type="button"
+							onclick="PF('emailEditorWidget').clear();" />
+					</h:panelGrid>
+
+					<p:blockUI block="contactUsPanel" trigger="sendEmailBtn"></p:blockUI>
+				</p:panel>
+			</h:form>
+
+
+		</ui:define>
+
+		<ui:define name="disebar">
+			<div id="sidebar">
+
+				<h:panelGrid>
+					<h2></h2>
+					<h:outputLink
+						value="http://cafebazaar.ir/app/com.peaceworld.wikisms/?l=fa"
+						target="_blank">
+						<h:graphicImage style="margin-top: 25px;" width="253"
+							value="/resources/images/android_app_logo.png" />
+					</h:outputLink>
+
+				</h:panelGrid>
+			</div>
+		</ui:define>
+
+
+	</ui:composition>
+
+</h:body>
+</html>

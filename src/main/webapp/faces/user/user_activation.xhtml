@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>ویکی پیامک</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<h:outputStylesheet library="css" name="default.css" />
+
+</h:head>
+
+<h:body>
+
+	<ui:composition template="/template/common/v1/mainframe.xhtml">
+
+
+		<ui:define name="header">
+			<div id="header" />
+		</ui:define>
+		<ui:define name="post">
+			<h:outputStylesheet library="css" name="plain_page.css" />
+			<div>
+				<h:form>
+					<p:panel id="panel" >
+						<p:growl id="growl" showDetail="true" sticky="false" />
+						<p:outputLabel value="برای تکمیل مراحل ثبت نام، کد رمزی که به ایمیل شما ارسال شده است را در کادر زیر وارد نماید و دکمه اتمام ثبت نام را فشار دهید" />
+						<br />
+						<br />
+						<p:spacer width="50"></p:spacer>
+						<p:outputLabel style="color: red;" for="verificationCode" value="کد رمز:" />
+						<p:spacer width="7"></p:spacer>
+						<p:inputMask id="verificationCode" mask="999999999999999" value="#{userBean.userVerificationCode}"></p:inputMask>
+						<br />
+						<p:commandButton id="resendEmail" ajax="true" actionListener="#{userBean.sendUserVerificationEmail}" update="@form"	value="ارسال مجدد ایمیل"></p:commandButton>
+						<p:spacer width="100"></p:spacer>
+						<p:commandButton id="completeRegistration" ajax="true"	action="#{userBean.completeUserRegistration}" update="@form" value="اتمام ثبت نام"></p:commandButton>
+
+					</p:panel>
+					<p:blockUI block="panel" trigger="completeRegistration" />
+					<p:blockUI block="panel" trigger="resendEmail" />
+				</h:form>
+			</div>
+		</ui:define>
+
+		<ui:define name="disebar">
+			<div id="sidebar" >
+				<ul>
+				</ul>
+			</div>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

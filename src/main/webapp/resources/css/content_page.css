@@ -1,0 +1,38 @@
+
+
+.ui-datatable.contenttable .ui-datatable-data tr,
+.ui-datatable.contenttable .ui-datatable-data-empty tr,
+.ui-datatable.contenttable .ui-datatable-data td,
+.ui-datatable.contenttable .ui-datatable-data-empty td {
+    border-style: none;
+}
+
+.ui-datatable table
+{
+	border-collapse: inherit;
+}
+
+[id="contentsTable_head"] {
+    display: none;
+} 
+.ui-widget{
+	font-size: 14px;
+	color: #405A67;
+}
+
+.ui-widget-content {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+div [id="contentsTable"]
+{
+	float: left;
+}
+
+.ui-widget-content a {
+    color: #38B5F1;
+}
+
+

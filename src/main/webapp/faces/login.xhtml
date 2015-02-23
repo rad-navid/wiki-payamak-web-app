@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+
+<h:body>
+
+	<ui:composition template="/template/common/v1/mainframe.xhtml">
+
+		<ui:define name="post">
+	
+			<p:growl id="publicMessage" widgetVar="growl" showDetail="true" showSummary="true" autoUpdate="true" globalOnly="true"/>
+			
+			<h:outputStylesheet library="css" name="login.css" />
+	
+			<p:tabView id="tabview">
+				<p:tab title="کاربر اندروید">
+					<h:form  id="androidLoginForm" >
+						<h:panelGrid style="innercontent" columns="3" cellpadding="10">
+							<p:outputLabel for="userIdentifier" value="شناسه کاربری:"/>
+							<p:inputMask id="userIdentifier" required="true" mask="999999999999999" value="#{userBean.user.userIdentifier}"></p:inputMask>
+							<p:messages for="userIdentifier" showDetail="true" showSummary="false"  />
+							
+							<p:commandButton value="پاک کردن فرم" ajax="true" type="reset" update="@form"/>
+      						<p:commandButton id="androidLginBtn" value="ورود" ajax="true" update="@form" action="#{userBean.loginByuserIdentifier}" />
+							
+						</h:panelGrid>
+						<p:blockUI block="androidLoginForm" trigger="androidLginBtn" ></p:blockUI>
+					</h:form>
+				</p:tab>
+				<p:tab title="ورود">
+					<h:form id="loginForm">
+						<h:panelGrid columns="3" cellpadding="10">
+						
+							<p:outputLabel for="email_address" value="نام کاربر(ایمیل):"/>
+							<p:inputText id="email_address" value="#{userBean.user.email}" required="true"  varequiredMessage="لطفا پست الکترونیکی خود را وارد کنید" label="lable email address">
+								  <f:validateRegex	pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</p:inputText>
+							<p:messages for="email_address" showDetail="true" showSummary="false"  />
+							
+							<p:outputLabel for="password" value="کلمه عبور:"/>
+							<p:password id="password" required="true" value="#{userBean.user.password}"/>
+							<p:messages  for="password" showDetail="true" showSummary="false"  />
+
+							<p:commandButton value="پاک کردن فرم" ajax="true" update="@form" type="reset" />
+      						<p:commandButton id="loginBtn" value="ورود" ajax="true"  update="@form" action="#{userBean.loginByEmail}" />
+      						
+						</h:panelGrid>
+						
+						<p:commandLink id="resetPass1" immediate="true" style="color:#38B5F1;" ajax="true"  action="pretty:resetpass" >رمز عبور خود را فراموش کرده اید؟</p:commandLink>
+						
+						<p:blockUI block="loginForm" trigger="loginBtn" ></p:blockUI>
+						<p:blockUI block="loginForm" trigger="resetPass1" ></p:blockUI>
+						
+					</h:form>
+				</p:tab>
+				<p:tab id="signupTab" title="ثبت نام" >
+				
+					<h:form id="signupForm" >
+					
+						<h:panelGrid columns="3" cellpadding="15">
+						
+							<p:outputLabel for="email" value="پست الکترونیکی:"/>
+							<p:inputText id="email" value="#{userBean.user.email}" required="true"  varequiredMessage="لطفا پست الکترونیکی خود را وارد کنید" label="lable email address">
+								  <f:validateRegex	pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</p:inputText>
+							<p:messages for="email" showDetail="true" showSummary="false"  />
+							
+							<p:outputLabel for="pwd1" value="رمز عبور:"/>
+							<p:password id="pwd1" value="#{userBean.user.password}" match="pwd2" feedback="true" inline="true" required="true" promptLabel="لطفا کلمه عبور را وارد کنید" weakLabel="ضعیف"
+                    			goodLabel="متوسط" strongLabel="قوی" varequiredMessage="لطفا کلمه عبور خود را وارد کنید"   />
+                    		<p:messages for="pwd1" showDetail="true" showSummary="false"  />
+
+							<p:outputLabel for="pwd2" value="تکرار رمز عبور"/>
+     						<p:password id="pwd2" value="#{userBean.passwordVerify}" label="Password 2" required="true" varequiredMessage="لطفا کلمه عبور خود را  مجددا وارد کنید" />
+							<p:messages for="pwd2" showDetail="true" showSummary="false"  />
+							
+							<p:outputLabel for="uname" value="نام کاربری:"/>
+							<p:inputText id="uname" value="#{userBean.user.username}" required="true"  varequiredMessage="لطفا نام کاربری خود را وارد کنید" label="lable for uname"/>
+							<p:messages for="uname" showDetail="true" showSummary="false"  />
+							
+							
+      						<p:outputLabel for="securitycode" value="کد امنیتی:"/>
+      						<p:captcha id="securitycode" label="کد امنیتی" required="true" />
+      						<p:messages for="securitycode" showDetail="true" showSummary="false"  />
+      						
+							<p:commandButton value="پاک کردن فرم" type="reset" />
+      						<p:commandButton id="signupBtn" value="ثبت نام"  action="#{userBean.signup}" ajax="true" update="@form" />
+      						
+						</h:panelGrid>
+						
+						<p:commandLink id="resetPass2" immediate="true" style="color:#38B5F1;" ajax="true" action="pretty:resetpass">رمز عبور خود را فراموش کرده اید؟</p:commandLink>
+						
+						<p:blockUI block="signupForm" trigger="signupBtn" ></p:blockUI>
+						<p:blockUI block="signupForm" trigger="resetPass2" ></p:blockUI>
+						
+					</h:form>
+					
+					 
+				</p:tab>
+			</p:tabView>
+			
+			
+
+		</ui:define>
+
+		<ui:define name="disebar">
+			<div id="sidebar">
+
+				<h:panelGrid>
+					<h2></h2>
+					<h:outputLink
+						value="http://cafebazaar.ir/app/com.peaceworld.wikisms/?l=fa"
+						target="_blank">
+						<h:graphicImage style="margin-top: 25px;" width="253"
+							value="/resources/images/android_app_logo.png" />
+					</h:outputLink>
+
+				</h:panelGrid>
+			</div>
+		</ui:define>
+
+
+	</ui:composition>
+
+</h:body>
+</html>

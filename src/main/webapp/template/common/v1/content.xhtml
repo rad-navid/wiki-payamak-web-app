@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition>
+		
+		<h:outputScript library="javascript" name="likeBtnScript.js" target="head" />
+		<h:outputStylesheet library="css" name="content_page.css" />
+		<div id="content">
+			
+			<div class="link-container">
+				<div class="link_redirection-container">
+					<h2 id="grouptitle" class="title">#{contentBrowserBean.currentCategoryName()}</h2>
+				</div>
+			</div>
+
+			<p:dataTable id="contentsTable" styleClass="contenttable" var="content"  value="#{contentBrowserBean.contentList}" rowIndexVar="rowindex" >
+				<p:column  >
+					<ui:insert name="post">
+						<h:form id="form">
+							<div class="post">
+
+								<h3 class="date">
+									#{contentBrowserBean.getContentDate(content.insertionDateTime)}</h3>
+								<div class="entry">
+									<p dir="rtl">#{content.plainText}</p>
+								</div>
+
+								<p class="meta">
+
+									<p:commandLink dir="rtl" id="like" styleClass="more"
+										action="#{contentBrowserBean.likeContent(content.id)}"
+										value="می‌پسندم(#{content.likedCounter})" ajax="true"
+										update="@none" onclick="$(this).likeContent(#{rowindex})">
+									</p:commandLink>
+
+									<p:commandLink dir="rtl" id="dislike" styleClass="more"
+										action="#{contentBrowserBean.disLikeContent(content.id)}"
+										ajax="true" update="@none" style="display:none;"
+										onclick="$(this).dislikeContent(#{rowindex})">
+									</p:commandLink>
+
+
+
+								</p>
+
+
+							</div>
+						</h:form>
+					</ui:insert>
+				</p:column>
+			</p:dataTable>
+
+
+			<!-- page handling -->
+
+			<h:form id="link_redirection_form">
+				<div class="link-container">
+					<div class="link_redirection-container">
+						#{contentBrowserBean.indexPages()}
+						<ui:repeat var="page" value="#{contentBrowserBean.pages}">
+							<h:commandButton style="color:red" value="#{page.lable}"
+								rendered="#{page.pageNumber==contentBrowserBean.currentPage}" />
+
+							<h:commandButton
+								action="#{contentBrowserBean.goToPage(page.pageNumber)}"
+								value="#{page.lable}"
+								rendered="#{page.pageNumber!=contentBrowserBean.currentPage}">
+							</h:commandButton>
+
+						</ui:repeat>
+					</div>
+				</div>
+			</h:form>
+			
+			<!-- end of page handling -->
+
+		</div>
+		<!-- end contentn -->
+
+
+
+	</ui:composition>
+
+</body>
+</html>

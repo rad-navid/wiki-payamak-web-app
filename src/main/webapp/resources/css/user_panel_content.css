@@ -1,0 +1,17 @@
+
+#content > div {
+	border-top-left-radius: 25px;
+	border-top-right-radius : 3px;
+	border-bottom-right-radius : 3px; 
+	border-bottom-left-radius : 3px;
+	margin-left: 18px;
+	margin-top:40px;
+	margin-right: 0px;
+	margin-bottom:100px;
+	border:none;
+	}
+	
+#content > div > div {
+		margin: 0px;
+		padding: 0px;
+	}

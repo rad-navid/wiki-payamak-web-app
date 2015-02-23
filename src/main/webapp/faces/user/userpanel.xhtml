@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<ui:composition template="/template/common/v1/mainframe.xhtml">
+
+		<ui:define name="post">
+
+			<h:outputStylesheet library="css" name="user_panel_content.css" />
+			
+			<p:panel>
+			
+				<h:form>
+					<p:growl id="growl" showDetail="true" showSummary="true" autoUpdate="true" globalOnly="true" sticky="false" />  
+				
+					<p:panel style="direction: rtl;"  id="newSmsPanel" header="ارسال پیامک جدید" rendered="#{userPanelBean.render(1)}">
+
+						<p:editor style="margin-right:-15px;" id="SmsEditor" widgetVar="SmsEditorWidget" value="#{userPanelBean.newSmsContent}" width="600" />
+
+						<h:panelGrid columns="2" style="margin-top: 10px">
+							<p:commandButton id="sendSmsBtn" value="ارسال" ajax="true" update="@form" action="#{userPanelBean.sendNewSms()}" />
+							<p:commandButton value="پاک کردن" type="button" onclick="PF('SmsEditorWidget').clear();" />
+						</h:panelGrid>
+						
+						<p:blockUI block="newSmsPanel" trigger="sendSmsBtn"></p:blockUI>
+					</p:panel>
+				
+					<p:panel id="changePassPanel" style="direction: rtl;" header="تغییر رمز عبور"
+						rendered="#{userPanelBean.render(2)}">
+						<h:panelGrid columns="3" cellpadding="10">
+
+							<p:outputLabel for="oldpassword" value="رمز عبور فعلی:"></p:outputLabel>
+							<p:password required="true" value="#{userPanelBean.oldPass}" id="oldpassword"></p:password>
+							<p:message for="oldpassword"></p:message>
+
+							<p:outputLabel for="pwd1" value="رمز عبور جدید:" />
+							<p:password id="pwd1" value="#{userPanelBean.newPass}" match="pwd2" feedback="true" inline="true" required="true"
+								promptLabel="لطفا کلمه عبور را وارد کنید" weakLabel="ضعیف"	goodLabel="متوسط" strongLabel="قوی" 	varequiredMessage="لطفا کلمه عبور خود را وارد کنید">
+							</p:password>
+							<p:message for="pwd1"></p:message>
+
+							<p:outputLabel for="pwd2" value="تکرار رمز عبور جدید:" />
+							<p:password id="pwd2" value="#{userPanelBean.passwordVerify}" label="Password 2" required="true"	varequiredMessage="لطفا کلمه عبور خود را  مجددا وارد کنید" />
+							<p:message for="pwd2"></p:message>
+							
+							<p:commandButton value="پاک کردن فرم"  type="reset" />
+							<p:commandButton id="changePassBtn" value="ثبت" action="#{userPanelBean.changePassword}" ajax="true" update="@form" />
+
+						</h:panelGrid>
+						
+						<p:blockUI block="changePassPanel" trigger="changePassBtn"></p:blockUI>
+						
+					</p:panel>
+				
+					<p:dataTable var="onlineActivity"
+						value="#{userPanelBean.onlineActivities}" rows="5"
+						paginator="true" rowsPerPageTemplate="5,10,15"
+						rendered="#{userPanelBean.render(3)}">
+
+						<p:column width="140" headerText="تاریخ">
+							<h:outputText value="#{onlineActivity.date}" style="center" />
+						</p:column>
+						<p:column width="50" headerText="رای مثبت">
+							<h:outputText value="#{onlineActivity.accepted}" style="center" />
+						</p:column>
+						<p:column width="50" headerText="رای منفی">
+							<h:outputText value="#{onlineActivity.denied}" style="center" />
+						</p:column>
+						<p:column headerText="توضیح">
+							<h:outputText escape="false"
+								value="#{onlineActivity.description}" style="float:right;" />
+						</p:column>
+
+					</p:dataTable>
+				
+					<p:dataTable var="registeredContent"
+						value="#{userPanelBean.registeredContents}" rows="5"
+						paginator="true" rowsPerPageTemplate="5,10,15"
+						rendered="#{userPanelBean.render(5)}">
+
+						<p:column width="140" headerText="تاریخ">
+							<h:outputText value="#{registeredContent.date}" style="center" />
+						</p:column>
+						<p:column width="50" headerText="پسندیده شده">
+							<h:outputText value="#{registeredContent.liked}" style="center" />
+						</p:column>
+						<p:column width="50" headerText="مشاهده شده">
+							<h:outputText value="#{registeredContent.viewd}" style="center" />
+						</p:column>
+						<p:column headerText="پیامک">
+							<h:outputText escape="false"
+								value="#{registeredContent.content}" style="float:right;" />
+						</p:column>
+
+					</p:dataTable>
+				
+					<p:panel style="direction: rtl;" header="مشخصات کاربر"	rendered="#{userPanelBean.render(4)}">
+						<h:panelGrid columns="2" cellpadding="10">
+						
+						<p:outputLabel style="font-weight: bolder;font-style: italic;color: red;" value="نام کاربری:"/>
+						<p:outputLabel value="#{userPanelBean.user.username}"/>
+						
+						<p:outputLabel style="font-weight: bolder;font-style: italic;color: red;" value="شناسه کاربری:" />
+						<p:outputLabel value="#{userPanelBean.user.userIdentifier}" />
+						
+						<p:outputLabel style="font-weight: bolder;font-style: italic;color: red;" value="نوع دسترسی:"/>
+						<p:outputLabel value="#{userPanelBean.showUserAccessLevel()}"/>
+						
+						<p:outputLabel style="font-weight: bolder;font-style: italic;color: red;" value="توضیح:"/>
+						<p:outputLabel value="#{userPanelBean.showUserAccessLevelDesc()}"/>
+						
+						<p:outputLabel style="font-weight: bolder;font-style: italic;color: red;" value="تاریخ عضویت:"/>
+						<p:outputLabel value="#{userPanelBean.showUserRegistrationTime()}"/>
+						
+						</h:panelGrid>
+						
+					</p:panel>
+					
+					<p:panel style="direction: rtl;"  id="emailPanel" header="نظرات/پیشنهادات/انتقادات" rendered="#{userPanelBean.render(6)}">
+						
+						<br />
+						<p:outputLabel value="اگر مایلید پاسخی دریافت کنید، ایمیل خود را در پایان پیامتان ذکر کنید"/>
+						<br />
+						<br />
+						<p:editor style="margin-right:-15px;" id="Emaileditor" widgetVar="emailEditorWidget" value="#{userPanelBean.emailUsContent}" width="600" />
+
+						<h:panelGrid columns="2" style="margin-top: 10px">
+							<p:commandButton id="sendEmailBtn" value="ارسال" ajax="true" action="#{userPanelBean.sendEmail()}" update="@form"/>
+							<p:commandButton value="پاک کردن" type="button" onclick="PF('emailEditorWidget').clear();" />
+						</h:panelGrid>
+						
+						<p:blockUI block="emailPanel" trigger="sendEmailBtn"></p:blockUI>
+					</p:panel>
+					
+					
+				</h:form>
+			</p:panel>
+		</ui:define>
+
+		<ui:define name="sidebar_content">
+			
+			<h:outputStylesheet library="css" name="user_panel_sidebar.css" />
+			
+			<h:form dir="rtl">
+				<p:menu  toggleable="true" style="width:13.5em;margin:40px;direction: rtl;">
+					<p:submenu label="ارسال پیامک">
+						<p:menuitem value="ارسال پیامک جدید" ajax="false" action="#{userPanelBean.newSmsMod}"  />
+					</p:submenu>
+					<p:submenu label="تنظیمات">
+						<p:menuitem value="مشخصات کاربر" ajax="false" action="#{userPanelBean.userStatusMod}" />
+						<p:menuitem value="تغییر کلمه عبور" ajax="false" action="#{userPanelBean.changePasswordMod}" />
+					</p:submenu>
+					<p:submenu label="گزارش فعالیت های فعال">
+						<p:menuitem id="test" value="فعالیت های در حال رای گیری" ajax="false" action="#{userPanelBean.onlineActivityMod}" />
+					</p:submenu>
+					<p:submenu label="گزارش فعالیت های ثبت شده">
+						<p:menuitem value="پیامک های ارسال شده" ajax="false"	action="#{userPanelBean.registeredContentsMod}" />
+					</p:submenu>
+					<p:submenu label="تماس با ما">
+						<p:menuitem value="ارسال نظرات" ajax="false" action="#{userPanelBean.contactUsMod}"/>
+					</p:submenu>
+					<p:submenu label="خروج">
+						<p:menuitem value="خروج" ajax="false" action="#{userPanelBean.logout}" />
+					</p:submenu>
+				</p:menu>
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
