@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQuery(name="Content.GetChangeLogById", query="SELECT cnt FROM Content cnt WHERE cnt.approved=TRUE AND cnt.id > :cntId  AND cnt.lastChengedTime > :lastChangeTime"),
 @NamedQuery(name="Content.GetContentsByCategory", query="SELECT cnt FROM Content cnt WHERE cnt.approved=TRUE  AND  cnt.id > :cntId  AND cnt.contentTag LIKE :likequery"),
 @NamedQuery(name="Content.GetContentsCountByCategory", query="SELECT COUNT(cnt) FROM Content cnt WHERE cnt.approved=TRUE  AND  cnt.contentTag LIKE :likequery"),
-@NamedQuery(name="Content.GetMostLiked", query="SELECT cnt FROM Content cnt ORDER BY cnt.likedCounter DESC"),
-@NamedQuery(name="Content.GetMostViewed", query="SELECT cnt FROM Content cnt ORDER BY cnt.viewedCounter DESC"),
-@NamedQuery(name="Content.GetMostRecent", query="SELECT cnt FROM Content cnt ORDER BY cnt.insertionDateTime DESC"),
+@NamedQuery(name="Content.GetMostLiked", query="SELECT cnt FROM Content cnt WHERE cnt.approved=TRUE ORDER BY cnt.likedCounter DESC"),
+@NamedQuery(name="Content.GetMostViewed", query="SELECT cnt FROM Content cnt WHERE cnt.approved=TRUE ORDER BY cnt.viewedCounter DESC"),
+@NamedQuery(name="Content.GetMostRecent", query="SELECT cnt FROM Content cnt WHERE cnt.approved=TRUE ORDER BY cnt.insertionDateTime DESC"),
 @NamedQuery(name="Content.GetUserContentes", query="SELECT cnt FROM Content cnt WHERE cnt.creatorUser= :userIdentifier")
 
 })
