@@ -81,5 +81,10 @@
        <pattern value="/contactus" /> 
        <view-id value="/faces/contact_us.xhtml" />
    </url-mapping> 
+   
+   <url-mapping id="googleverification"> 
+       <pattern value="/google52256c66bd2d9272.html" /> 
+       <view-id value="/google52256c66bd2d9272.html" />
+   </url-mapping> 
 
 </pretty-config>
