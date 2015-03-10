@@ -14,11 +14,11 @@
   </context-param>
   <context-param>
     <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
-    <param-value>6Ld8x_8SAAAAAAgHK5aSi2jgQHqC77RrBqsxxKIV</param-value>
+    <param-value>6Lf6TwMTAAAAAHoDaFupolNWtENDq8Q_W_Qep3m6</param-value>
   </context-param>
   <context-param>
     <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
-    <param-value>6Ld8x_8SAAAAAGi3EnC5YbyO8a2O9eTfzFzZFxkM</param-value>
+    <param-value>6Lf6TwMTAAAAAFZd4Emt1skrG7Arp7z1jAFG2Ny4</param-value>
   </context-param>
   <context-param>
     <param-name>resteasy.scan</param-name>
