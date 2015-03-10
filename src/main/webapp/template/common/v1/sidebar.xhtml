@@ -2,8 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head></h:head>
 <body>
@@ -12,7 +11,7 @@
 		<div id="sidebar">
 
 			<h:panelGrid>
-				<h2></h2>
+				<span></span>
 					<h:outputLink value="http://cafebazaar.ir/app/com.peaceworld.wikisms/?l=fa"	target="_blank" >
 					<h:graphicImage style="margin-top: 25px;" width="253"	value="/resources/images/android_app_logo.png"/>
 				</h:outputLink> 
@@ -21,7 +20,7 @@
 
 			<ul>
 				<li>
-					<h2 dir="rtl">جستجو</h2> 
+					<span dir="rtl">جستجو</span> 
 					<h:form  id="search_form">
 						<h:inputText id="search" value="#{contentBrowserBean.search}" />
 						<h:commandButton id="searchbtn"

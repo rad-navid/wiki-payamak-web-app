@@ -3,14 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>ویکی پیامک</title>
-	<meta name="keywords" content="" />
-	<meta name="description" content="" />
+	<title>#{contentBrowserBean.metaPageTitle}</title>
+	<meta name="keywords" content="#{contentBrowserBean.metaKeyWords}" />
+	<meta name="description" content="#{contentBrowserBean.metaDescription}" />
 	<h:outputStylesheet library="css" name="default.css" />
 
 </h:head>
@@ -19,11 +18,11 @@
 	<ui:insert name="header">
 		<div id="header">
 			<div id="logo">
-				<h2>خوش آمدید</h2>
-				<h1>
+				<span>خوش آمدید</span>
+				<h2>
 					<a href="#">ویکی پیامک</a>
-				</h1>
-				<h2>به</h2>
+				</h2>
+				<span>به</span>
 			</div>
 			<div id="menu">
 				<h:form id="panelForm">
@@ -31,7 +30,7 @@
 						<li class="active"><h:commandLink value="صفحه اصلی" accesskey="1" action="pretty:home" /></li>
 						<li><h:commandLink  value="پنل کاربری" action="pretty:userpanel" /></li>
 						<li><h:commandLink value="ویکی پیامک" action="pretty:faq" /></li>
-						<li><p:commandLink ajax="false"  action="pretty:contactus" >تماس با ما</p:commandLink></li>
+						<li><h:commandLink value="تماس با ما"  action="pretty:contactus" /></li>
 					</ul>
 
 					
@@ -107,9 +106,6 @@
 	</div>
 	<div align="center" style="display:none">
 		<ui:insert name="trailer">
-		This template downloaded form <a
-				href='http://all-free-download.com/free-website-templates/'>free
-				website templates</a>
 		</ui:insert>
 	</div>
 </h:body>

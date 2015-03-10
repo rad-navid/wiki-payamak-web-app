@@ -3,26 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>ویکی پیامک</title>
-	<meta name="keywords" content="" />
-	<meta name="description" content="" />
-	<h:outputStylesheet library="css" name="default.css" />
-	<script type="text/javascript">
-        $(document).ready(function(){
-        	$("[id='search_form:search']").keypress(function(e) {
-        	    if (e.which == 13) {
-        	    	$("[id='search_form:searchbtn']").click();
-        	    }
-        	});
-        });
-    </script> 
-
-</h:head>
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:body> 
  	
@@ -40,6 +21,8 @@
 		</ui:define>
 		
 	</ui:composition>
+	
+	#{session.invalidate()}
 
 </h:body> 
 

@@ -3,9 +3,9 @@ package com.peaceworld.wikisms.controller.beans;
 import java.io.Serializable;
 
 import javax.ejb.Stateful;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 
-@ViewScoped
+@RequestScoped
 @Stateful
 public class SearchHandlerBean extends ContentHandlerBean  implements Serializable{
 

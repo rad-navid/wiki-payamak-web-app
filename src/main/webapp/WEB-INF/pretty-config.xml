@@ -57,6 +57,10 @@
       <pattern value="/index" /> 
       <view-id value="/faces/index.xhtml" />
    </url-mapping> 
+   <url-mapping id="categoryView"> 
+      <pattern value="/sms/#{ cn : contentBrowserBean.cname }" />
+      <view-id value="/faces/index.xhtml" />
+   </url-mapping> 
    <url-mapping id="login"> 
        <pattern value="/login" /> 
        <view-id value="/faces/login.xhtml" />

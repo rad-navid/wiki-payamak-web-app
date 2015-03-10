@@ -136,6 +136,20 @@ public class ContentDao {
 		}
 	}
 	
+	public ArrayList<Content> getRandomContent(int firstResult, int maxResult)
+	{
+		try {
+			String query="SELECT * FROM Content WHERE id >= FLOOR(RAND()*126000)";
+			ArrayList<Content> contentList=(ArrayList<Content>)
+					em.createNativeQuery(query,Content.class).setFirstResult(firstResult).setMaxResults(maxResult).getResultList();
+			return contentList;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	
 	public ArrayList<Content> getUserContents(long userIdentifier, int limit)
 	{
@@ -169,25 +183,28 @@ public class ContentDao {
 		return false;
 	}
 
-	public void like(long contentId) {
+	public boolean like(long contentId) {
 		try {
 			Content c=em.find(Content.class, contentId);
 			c.setLikedCounter(c.getLikedCounter()+1);
 			em.persist(c);
 			em.flush();
+			return true;
 		} catch (Exception e) {
 		}
+		return false;
 	}
 
-	public void disLike(long contentId) {
+	public boolean disLike(long contentId) {
 		try {
 			Content c=em.find(Content.class, contentId);
 			c.setLikedCounter(c.getLikedCounter()-1);
 			em.persist(c);
 			em.flush();
+			return true;
 		} catch (Exception e) {
 		}
-		
+		return false;
 	}
 	
 	public ArrayList<Content> getLastContentsState(long indexId, long lastChangeTime,int limit)

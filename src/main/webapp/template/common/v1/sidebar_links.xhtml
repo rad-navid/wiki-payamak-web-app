@@ -7,18 +7,23 @@
 <h:head></h:head>
 <body>
 	<ui:composition>
-		<h2 dir="rtl">گروه های منتخب</h2>
+		<span dir="rtl">گروه های منتخب</span>
 		<h:form styleClass="links">
 			<h:dataTable dir="rtl" var="linkHelper"	value="#{contentBrowserBean.specialLinks}">
 			
 				<h:column headerText="Column1">
 
-					<h:commandLink  styleClass="first" style="color:red" value="#{linkHelper.linkLable}"
-						rendered="#{linkHelper.linkEnum == contentBrowserBean.currentLink}" />
+					<h:panelGroup
+						rendered="#{linkHelper.linkEnum == contentBrowserBean.currentLink}">
+						<a class="first" style="color: red;"
+							href="#{contentBrowserBean.getSpecialLinkAsUrl(linkHelper.linkLable,linkHelper.linkEnumName,1)}">#{linkHelper.linkLable}</a>
+					</h:panelGroup>
 
-					<h:commandLink styleClass="first"	action="#{contentBrowserBean.setLink(linkHelper.linkEnumName)}"	value="#{linkHelper.linkLable}"
+					<h:panelGroup
 						rendered="#{linkHelper.linkEnum != contentBrowserBean.currentLink}">
-					</h:commandLink>
+						<a class="first"
+							href="#{contentBrowserBean.getSpecialLinkAsUrl(linkHelper.linkLable,linkHelper.linkEnumName,1)}">#{linkHelper.linkLable}</a>
+					</h:panelGroup>
 
 
 				</h:column>

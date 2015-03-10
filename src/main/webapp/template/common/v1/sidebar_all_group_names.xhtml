@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<ui:composition>
+		<span >تمام گروه ها</span>
+
+
+		<h:dataTable var="category"
+			value="#{contentBrowserBean.allCatgoryList}">
+			<h:column headerText="Column1">
+				<h3>
+					<h:panelGroup rendered="#{category.id == contentBrowserBean.currentCategory.id}">
+						<a class="first" style="color: red;"
+							href="#{contentBrowserBean.getCategoryNameAsUrl(category.name,category.id,1)}">#{category.name}</a>
+					</h:panelGroup>
+	
+					<h:panelGroup rendered="#{category.id != contentBrowserBean.currentCategory.id}">
+						<a class="first"
+							href="#{contentBrowserBean.getCategoryNameAsUrl(category.name,category.id,1)}">#{category.name}</a>
+					</h:panelGroup>
+				</h3>
+			</h:column>
+		</h:dataTable>
+
+	</ui:composition>
+
+</body>
+</html>

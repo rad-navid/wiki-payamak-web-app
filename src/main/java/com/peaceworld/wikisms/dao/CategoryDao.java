@@ -45,6 +45,18 @@ public class CategoryDao {
 		return null;
 	}
 	
+	public ContentCategory getCategoryByName(String catName) {
+		
+		try {
+			ContentCategory categorie= (ContentCategory) em.createNamedQuery("ContentCategory.findAllContentCategoriesByCategoryName")
+					.setParameter("catName", catName).getSingleResult();
+			return categorie;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
 	public ArrayList<ContentCategory> getAll()
 	{
 		

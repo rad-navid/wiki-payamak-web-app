@@ -64,13 +64,15 @@ public class CategoryNotificationDao {
 	}
 	public boolean addAll(List<CategoryNotification> ccns)
 	{
+		//escape all new notifications
+		if(1==1)
+			return true;
 		try{
 			for(CategoryNotification ccn:ccns)
 			{
 				ccn.setLastSentTime(System.currentTimeMillis());
 				em.persist(ccn);
 			}
-			
 			em.flush();
 			return true;
 		}

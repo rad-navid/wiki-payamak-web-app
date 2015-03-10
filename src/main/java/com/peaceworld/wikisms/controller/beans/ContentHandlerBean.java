@@ -7,17 +7,19 @@ import java.util.Comparator;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import com.peaceworld.wikisms.dao.ContentDao;
 import com.peaceworld.wikisms.model.Content;
 
-@ViewScoped
+@RequestScoped
 @ManagedBean
 public abstract class ContentHandlerBean implements Serializable{
 
 	private static final long serialVersionUID = -2063945080926166804L;
-	protected static final int LIST_SIZE_LIMIT=10;
+	protected static final int LIST_SIZE_LIMIT=50;
 	protected static final int MAX_SHOWN_PAGES=5;
 	
 	@EJB
@@ -36,6 +38,25 @@ public abstract class ContentHandlerBean implements Serializable{
 	protected abstract void goToPage(int index);
 	protected abstract void reEvaluatePages();
 	
+	public String getRootUrl(FacesContext ctx) {
+        HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
+
+        StringBuilder url = new StringBuilder(100);
+        String scheme = request.getScheme();
+
+        int port = request.getServerPort();
+
+        url.append(scheme);
+        url.append("://");
+        url.append(request.getServerName());
+
+        if (port > 0 && ((scheme.equalsIgnoreCase("http") && port != 80) || (scheme.equalsIgnoreCase("https") && port != 443))) {
+            url.append(':');
+            url.append(port);
+        }
+
+        return url.toString();
+    }
 	
 	public void indexPages()
 	{
@@ -111,6 +132,7 @@ public abstract class ContentHandlerBean implements Serializable{
 		
 		private String lable;
 		private int pageNumber;
+		private String href;
 		
 		public Page(String lable, int pageNumber) {
 			this.lable = lable;
@@ -123,6 +145,14 @@ public abstract class ContentHandlerBean implements Serializable{
 
 		public int getPageNumber() {
 			return pageNumber;
+		}
+
+		public String getHref() {
+			return href;
+		}
+
+		public void setHref(String href) {
+			this.href = href;
 		}
 	}
 	

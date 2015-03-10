@@ -7,31 +7,33 @@
 <h:head></h:head>
 <body>
 	<ui:composition>
-		<h2 dir="rtl">گروه ها</h2>
-		<h:form id="categoriesTable">
+		<span dir="rtl">گروه های دسته بندی شده</span>
+		
+		<h:panelGroup rendered="#{category.id != 0}">
+			<a class="groups"
+				href="#{contentBrowserBean.getMoveBackUrl(contentBrowserBean.currentCategory.id)}">بازگشت
+				به گروه قبلی</a>
+		</h:panelGroup>
 
-			<h:commandButton styleClass="groups" value="بازگشت به گروه قبلی"	action="#{contentBrowserBean.deepOutCategory()}">
-			</h:commandButton>
+		<h:dataTable dir="rtl" var="category"
+			value="#{contentBrowserBean.catgoryList}">
+			<h:column headerText="Column1">
+				<h:panelGroup
+					rendered="#{category.id == contentBrowserBean.currentCategory.id}">
+					<a class="groups" style="color: red;"
+						href="#{contentBrowserBean.getCategoryNameAsUrl(category.name,category.id,1)}">#{category.name}</a>
+				</h:panelGroup>
+
+				<h:panelGroup
+					rendered="#{category.id != contentBrowserBean.currentCategory.id}">
+					<a class="groups"
+						href="#{contentBrowserBean.getCategoryNameAsUrl(category.name,category.id,1)}">#{category.name}</a>
+				</h:panelGroup>
 
 
-			<h:dataTable dir="rtl" var="category"
-				value="#{contentBrowserBean.catgoryList}">
-				<h:column headerText="Column1">
+			</h:column>
+		</h:dataTable>
 
-					<h:commandButton styleClass="groups" style="color:red"
-						value="#{category.name}"
-						rendered="#{category.id == contentBrowserBean.currentCategory.id}" />
-
-					<h:commandButton styleClass="groups"
-						action="#{contentBrowserBean.deepInCategory(category.id)}"
-						value="#{category.name}"
-						rendered="#{category.id != contentBrowserBean.currentCategory.id}">
-					</h:commandButton>
-
-
-				</h:column>
-			</h:dataTable>
-		</h:form>
 	</ui:composition>
 
 </body>

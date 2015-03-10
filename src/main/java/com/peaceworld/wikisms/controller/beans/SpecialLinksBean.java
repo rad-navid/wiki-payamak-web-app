@@ -4,18 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.ejb.Stateful;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
-@ViewScoped
+@RequestScoped
 @Stateful
 public class SpecialLinksBean extends ContentHandlerBean  implements Serializable{
 	
 	private static final long serialVersionUID = 763357223487326871L;
 
 
-	public enum SpecialLink{MostViewed,MostLiked,MostResent}
+	public enum SpecialLink{MostViewed,MostLiked,MostResent,Random}
 	
-	private SpecialLink mMod=SpecialLink.MostLiked;
+	private SpecialLink mMod;
 	
 	private ArrayList<LinkHelper> links;
 	
@@ -25,6 +26,7 @@ public class SpecialLinksBean extends ContentHandlerBean  implements Serializabl
 		links.add(new LinkHelper(SpecialLink.MostLiked, "پسندیده شده ترین ها"));
 		links.add(new LinkHelper(SpecialLink.MostViewed, "بازدید شده ترین ها"));
 		links.add(new LinkHelper(SpecialLink.MostResent, "جدید ترین ها"));
+		links.add(new LinkHelper(SpecialLink.Random, "تصادفی"));
 		pageCounter=3;
 	}
 
@@ -42,6 +44,9 @@ public class SpecialLinksBean extends ContentHandlerBean  implements Serializabl
 			case MostViewed:
 				contentList = contentDao.getMostViewedContent(firstResult,LIST_SIZE_LIMIT);
 				break;
+			case Random:
+				contentList = contentDao.getRandomContent(firstResult,LIST_SIZE_LIMIT);
+				break;
 			}
 			
 			if(contentList!=null && contentList.size()>0)
@@ -54,12 +59,13 @@ public class SpecialLinksBean extends ContentHandlerBean  implements Serializabl
 		
 	}
 
-	public void load() {
+	public void load(String mod,int page) {
 		
+		setCurentLink(mod);
 		if(mMod==null)
-			return;
+			mMod=SpecialLink.Random;
 		reEvaluatePages();
-		goToPage(1);
+		goToPage(page);
 		
 	}
 
@@ -108,8 +114,14 @@ public class SpecialLinksBean extends ContentHandlerBean  implements Serializabl
 	public SpecialLink getCurrentLink() {
 		return mMod;
 	}
+	public String getCurrentLinkLable() {
+		for(LinkHelper lhp:links)
+			if(lhp.linkEnum==mMod)
+				return lhp.linkLable;
+		return "";
+	}
 
-	public void setCurentLink(String linkEnumName) {
+	private void setCurentLink(String linkEnumName) {
 		
 		if(linkEnumName==null)
 			return;
@@ -123,7 +135,44 @@ public class SpecialLinksBean extends ContentHandlerBean  implements Serializabl
 		}
 		
 	}
+	
+	public String getSpecialLinkAsUrl(String name,String code,int page)
+	{
+		 FacesContext ctx = FacesContext.getCurrentInstance();
+	     String contextPath = ctx.getExternalContext().getRequestContextPath();
+	     StringBuilder url = new StringBuilder(100);
+	     url.append(getRootUrl(ctx));
+	     url.append(contextPath);
+	     url.append("/sms/");
+	     url.append(name.replace("ها", "").trim().replace(" ", "_"));
+	     url.append(" اس ام اس ها و پیامک ها".replace(" ", "_"));
+	     url.append("?ln="+code);
+	     url.append("&pid="+page);
 
+		return url.toString();
+		
+	}
+	
+	public void indexPages()
+	{
+		super.indexPages();
+		LinkHelper LHP = null;
+		for(LinkHelper lhp:links)
+		{
+			if(lhp.linkEnum==mMod)
+			{
+				LHP=lhp;
+				break;
+			}
+		}
+		
+		if(LHP==null)
+			return;
+		
+		for(Page page:pages)
+			page.setHref(getSpecialLinkAsUrl(LHP.linkLable, LHP.linkEnum.name(),page.getPageNumber()));
+		
+	}
 
 	
 }

@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
@@ -166,6 +167,47 @@ public class ChangeLogServices {
 			changeList = (List<ContentDirectChange>)gson.fromJson(changeLogList, new TypeToken<List<ContentDirectChange>>() {}.getType());
 
 			boolean success=contentDao.setAllContentChenges(changeList);
+			if(success)
+				result= "successful";
+			else
+				result="failed";
+			
+		} catch (Exception e) {
+			result= e.toString();
+		}
+
+		Utility.invalidateSession(httpResuest);
+		return result;
+	}
+	
+	@POST
+	@Path("/likecontent")
+	public String likeContent(@FormParam("contentId") long contentId,@Context HttpServletRequest httpResuest)
+	{
+		String result="successful";
+		try {
+
+			boolean success=contentDao.like(contentId);
+			if(success)
+				result= "successful";
+			else
+				result="failed";
+			
+		} catch (Exception e) {
+			result= e.toString();
+		}
+
+		Utility.invalidateSession(httpResuest);
+		return result;
+	}
+	@POST
+	@Path("/dislikecontent")
+	public String dislikeContent(@FormParam("contentId") long contentId,@Context HttpServletRequest httpResuest)
+	{
+		String result="successful";
+		try {
+
+			boolean success=contentDao.disLike(contentId);
 			if(success)
 				result= "successful";
 			else

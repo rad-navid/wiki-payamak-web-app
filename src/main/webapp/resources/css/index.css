@@ -1,0 +1,7 @@
+
+#sidebar li span  {
+	display:block;
+	font-size: 18px;
+	padding: 30px 10px 40px 10px;
+	background: url("#{resource['images/img12.jpg']}") no-repeat left bottom;
+}

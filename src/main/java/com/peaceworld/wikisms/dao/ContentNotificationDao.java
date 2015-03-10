@@ -85,8 +85,12 @@ public class ContentNotificationDao {
 		try{
 			for(ContentNotification cn:cns)
 			{
-				cn.setLastSentTime(System.currentTimeMillis());
-				em.persist(cn);
+				//escape all new notifications except CONTENT_CREATE
+				if(cn.getAction().equalsIgnoreCase(ContentNotification.ACTION.CONTENT_CREATE.name()))
+				{
+					cn.setLastSentTime(System.currentTimeMillis());
+					em.persist(cn);
+				}
 			}
 			
 			em.flush();
