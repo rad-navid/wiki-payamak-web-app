@@ -70,10 +70,8 @@ public class ContentDao {
 	{
 		try {
 			String query="SELECT COUNT(*) FROM Content where plainText REGEXP \'[[:<:]]"+queryParam+"[[:>:]]\'";
-			System.out.println(query);
 			BigInteger result=(BigInteger) em.createNativeQuery(query).getResultList().get(0);
 			int counter=result.intValue();
-			System.out.println(counter);
 			return counter;
 			
 		} catch (Exception e) {
