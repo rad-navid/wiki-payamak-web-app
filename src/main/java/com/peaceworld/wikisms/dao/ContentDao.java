@@ -83,7 +83,6 @@ public class ContentDao {
 	public ArrayList<Content> getSearchContent(String queryParam ,int firstResult, int maxResult)
 	{
 		try {
-			
 			String query="SELECT * FROM Content where plainText REGEXP \'[[:<:]]"+queryParam+"[[:>:]]\'";
 			ArrayList<Content> contentList=(ArrayList<Content>)
 					em.createNativeQuery(query,Content.class).setFirstResult(firstResult).setMaxResults(maxResult).getResultList();

@@ -82,10 +82,13 @@ public class UserServices {
 					idList.add(Long.parseLong(ids[i]));
 				}catch(Exception exx){};
 			}
-			ArrayList<UserTable>userList=userDao.getUsersById(idList);
-			for(UserTable user:userList)
+			if(idList!=null && idList.size()>0)
 			{
-				result+=user.getUserIdentifier()+":"+user.getUsername()+";";
+				ArrayList<UserTable>userList=userDao.getUsersById(idList);
+				for(UserTable user:userList)
+				{
+					result+=user.getUserIdentifier()+":"+user.getUsername()+";";
+				}
 			}
 			String compressed=Utility.gzipCompress(result);
 			result= compressed;
